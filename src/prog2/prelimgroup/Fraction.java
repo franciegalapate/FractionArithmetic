@@ -291,7 +291,7 @@ public class Fraction {
         return result;
     }
 
-    private Fraction reduce() {
+    public Fraction reduce() {
         /* Method: reduce
          * Purpose: Reduce the current fraction to its simplest form.
          * Returns:
