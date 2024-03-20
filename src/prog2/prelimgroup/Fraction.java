@@ -1,7 +1,9 @@
 package prog2.prelimgroup;
 public class Fraction {
     protected prog2.prelimgroup.Fraction Fraction;
-    private int numerator, denominator;
+    protected int numerator, denominator;
+
+    /** CONSTRUCTORS */
     public Fraction() {
         /* Method: Default Constructor
          * Purpose: Create a new Fraction object and initialize it with "invalid" data.
@@ -24,6 +26,7 @@ public class Fraction {
         denominator = den;
     }
 
+    /** SETTERS AND GETTERS */
     public void setNumerator(int num) {
         /* Method: setNumerator
          * Purpose: Set the numerator of the Fraction object to the given value.
@@ -62,6 +65,7 @@ public class Fraction {
         return denominator;
     }
 
+    /** PARSE */
     public String toString() {
         /* Method: toString
          * Purpose: Generate a string representation of the Fraction object, including
@@ -99,6 +103,7 @@ public class Fraction {
         }
     }
 
+    /** OPERATIONS */
     public Fraction add(Fraction b) {
         /* BY ROBERT SEJ CUBE & PRINCE ASHRIN YXIE MENDOZA
          * Method: add
