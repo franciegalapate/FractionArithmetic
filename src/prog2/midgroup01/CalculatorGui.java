@@ -1,172 +1,123 @@
-//package prog2.midgroup01;
-//
-//import javax.swing.*;
-//import java.awt.*;
-//import java.awt.event.*;
-//
-//    public class CalculatorGui extends JFrame {
-//        private JTextField fraction1Field;
-//        private JTextField fraction2Field;
-//        private JComboBox<String> operationComboBox;
-//        private JButton calculateButton;
-//        private JLabel resultLabel;
-//
-//        public CalculatorGui() {
-//            setTitle("Fraction Calculator");
-//            setSize(300, 200);
-//            setDefaultCloseOperation(EXIT_ON_CLOSE);
-//            setLocationRelativeTo(null);
-//
-//            JPanel panel = new JPanel();
-//            panel.setLayout(new GridLayout(4, 2));
-//
-//            JLabel fraction1Label = new JLabel("Fraction 1:");
-//            fraction1Field = new JTextField();
-//            panel.add(fraction1Label);
-//            panel.add(fraction1Field);
-//
-//            JLabel fraction2Label = new JLabel("Fraction 2:");
-//            fraction2Field = new JTextField();
-//            panel.add(fraction2Label);
-//            panel.add(fraction2Field);
-//
-//            JLabel operationLabel = new JLabel("Operation:");
-//            String[] operations = {"Addition", "Subtraction", "Multiplication", "Division"};
-//            operationComboBox = new JComboBox<>(operations);
-//            panel.add(operationLabel);
-//            panel.add(operationComboBox);
-//
-//            calculateButton = new JButton("Calculate");
-//            resultLabel = new JLabel("Result:");
-//            panel.add(calculateButton);
-//            panel.add(resultLabel);
-//
-//            calculateButton.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    calculate();
-//                }
-//            });
-//
-//            add(panel);
-//            setVisible(true);
-//        }
-//
-//        private void calculate() {
-//            String fraction1Text = fraction1Field.getText();
-//            String fraction2Text = fraction2Field.getText();
-//
-//            // Parse fractions and operation
-//            Fraction fraction1 = parseFraction(fraction1Text);
-//            Fraction fraction2 = parseFraction(fraction2Text);
-//            String operation = (String) operationComboBox.getSelectedItem();
-//
-//            // Perform the operation
-//            Fraction result;
-//            switch (operation) {
-//                case "Addition":
-//                    result = fraction1.add(fraction2);
-//                    break;
-//                case "Subtraction":
-//                    result = fraction1.subtract(fraction2);
-//                    break;
-//                case "Multiplication":
-//                    result = fraction1.multiply(fraction2);
-//                    break;
-//                case "Division":
-//                    result = fraction1.divide(fraction2);
-//                    break;
-//                default:
-//                    result = new Fraction(0, 1); // Default to 0
-//            }
-//
-//            // Display the result
-//            resultLabel.setText("Result: " + result.toString());
-//        }
-//
-//        private Fraction parseFraction(String fractionText) {
-//            String[] parts = fractionText.split(" ");
-//            if (parts.length != 2) {
-//                throw new IllegalArgumentException("Invalid fraction format");
-//            }
-//            int whole = Integer.parseInt(parts[0]);
-//            String[] fractionParts = parts[1].split("/");
-//            if (fractionParts.length != 2) {
-//                throw new IllegalArgumentException("Invalid fraction format");
-//            }
-//            int numerator = Integer.parseInt(fractionParts[0]);
-//            int denominator = Integer.parseInt(fractionParts[1]);
-//            return new Fraction(whole, numerator, denominator);
-//        }
-//
-//        public static void main(String[] args) {
-//            new CalculatorGui();
-//        }
-//    }
-//
-//    class Fraction {
-//        private int whole;
-//        private int numerator;
-//        private int denominator;
-//
-//        public Fraction(int whole, int numerator, int denominator) {
-//            this.whole = whole;
-//            this.numerator = numerator;
-//            this.denominator = denominator;
-//            simplify();
-//        }
-//
-//        public Fraction(int numerator, int denominator) {
-//            this(0, numerator, denominator);
-//        }
-//
-//        public Fraction add(Fraction other) {
-//            int newNumerator = this.numerator * other.denominator + other.numerator * this.denominator;
-//            int newDenominator = this.denominator * other.denominator;
-//            return new Fraction(this.whole + other.whole, newNumerator, newDenominator);
-//        }
-//
-//        public Fraction subtract(Fraction other) {
-//            int newNumerator = this.numerator * other.denominator - other.numerator * this.denominator;
-//            int newDenominator = this.denominator * other.denominator;
-//            return new Fraction(this.whole - other.whole, newNumerator, newDenominator);
-//        }
-//
-//        public Fraction multiply(Fraction other) {
-//            int newNumerator = (this.whole * this.denominator + this.numerator) * (other.whole * other.denominator + other.numerator);
-//            int newDenominator = this.denominator * other.denominator;
-//            return new Fraction(newNumerator, newDenominator);
-//        }
-//
-//        public Fraction divide(Fraction other) {
-//            int newNumerator = (this.whole * this.denominator + this.numerator) * other.denominator;
-//            int newDenominator = (other.whole * other.denominator + other.numerator) * this.denominator;
-//            return new Fraction(newNumerator, newDenominator);
-//        }
-//
-//        private int gcd(int a, int b) {
-//            if (b == 0)
-//                return a;
-//            return gcd(b, a % b);
-//        }
-//
-//        private void simplify() {
-//            int gcd = gcd(Math.abs(numerator), Math.abs(denominator));
-//            numerator /= gcd;
-//            denominator /= gcd;
-//            whole += numerator / denominator;
-//            numerator %= denominator;
-//        }
-//
-//        @Override
-//        public String toString() {
-//            if (numerator == 0) {
-//                return String.valueOf(whole);
-//            } else if (whole == 0) {
-//                return numerator + "/" + denominator;
-//            } else {
-//                return whole + " " + numerator + "/" + denominator;
-//            }
-//        }
-//    }
-//
-//
+package prog2.midgroup01;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class MixedFractionCalculator implements ActionListener {
+
+    private JFrame frame;
+    private JPanel panel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JButton addButton;
+    private JButton subButton;
+    private JButton mulButton;
+    private JButton divButton;
+    private JButton answer;
+    private JLabel result;
+
+    Font myFont = new Font("Ink Free", Font.BOLD, 30);
+
+    MixedFractionCalculator() {
+        frame = new JFrame("Mixed Fractions Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(750, 500);
+
+        addButton = new JButton("+");
+        subButton = new JButton("-");
+        mulButton = new JButton("*");
+        divButton = new JButton("/");
+
+        //1st numerator
+        textField1 = new JTextField();
+        textField1.setBounds(150, 50, 75, 100);
+        textField1.setFont(myFont);
+
+        //1st denominator
+        textField2 = new JTextField();
+        textField2.setBounds(150, 250, 75, 100);
+        textField2.setFont(myFont);
+
+        //1st whole number
+        textField3 = new JTextField();
+        textField3.setBounds(50, 150, 75, 100);
+        textField3.setFont(myFont);
+
+        //2nd numerator
+        textField4 = new JTextField();
+        textField4.setBounds(550, 50, 75, 100);
+        textField4.setFont(myFont);
+
+        //2nd denominator
+        textField5 = new JTextField();
+        textField5.setBounds(550, 250, 75, 100);
+        textField5.setFont(myFont);
+
+        //2nd whole number
+        textField6 = new JTextField();
+        textField6.setBounds(450, 150, 75, 100);
+        textField6.setFont(myFont);
+
+        answer = new JButton("Calculate");
+        answer.setBounds(250, 375, 250, 50);
+        answer.setFont(myFont);
+        answer.addActionListener(this);
+
+        result = new JLabel();
+        result.setBounds(250, 425, 250, 50);
+        result.setFont(myFont);
+
+        frame.add(textField1);
+        frame.add(textField2);
+        frame.add(textField3);
+        frame.add(textField4);
+        frame.add(textField5);
+        frame.add(textField6);
+        frame.add(addButton);
+        frame.add(subButton);
+        frame.add(mulButton);
+        frame.add(divButton);
+        frame.add(answer);
+        frame.add(result);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        MixedFractionCalculator calculator = new MixedFractionCalculator();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            fractionInner f1 = new fractionInner(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+            fractionInner f2 = new fractionInner(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
+            fractionInner res;
+            if (e.getSource() == addButton) {
+                res = f1.add(f2);
+            } else if (e.getSource() == subButton) {
+                res = f1.sub(f2);
+            } else if (e.getSource() == mulButton) {
+                res = f1.mul(f2);
+            } else if (e.getSource() == divButton) {
+                res = f1.div(f2);
+            } else {
+                res = new fractionInner(1, 1);
+            }
+            result.setText(res.toString());
+        } catch (Exception excep) {
+            System.out.println(excep.getMessage());
+        }
+    }
+}
+
+class ZeroDenominatorException extends Exception {
+    ZeroDenominatorException() {
+        super("Fraction denominator cannot be 0.");
+    }
+}
