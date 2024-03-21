@@ -95,23 +95,33 @@ public class MixedFractionCalculator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            fractionInner f1 = new fractionInner(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
-            fractionInner f2 = new fractionInner(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
-            fractionInner res;
+            MixedFraction f1 = new MixedFraction(
+                    Integer.parseInt(textField1.getText()),
+                    Integer.parseInt(textField2.getText()),
+                    Integer.parseInt(textField3.getText())
+            );
+            MixedFraction f2 = new MixedFraction(
+                    Integer.parseInt(textField4.getText()),
+                    Integer.parseInt(textField5.getText()),
+                    Integer.parseInt(textField6.getText())
+            );
+            MixedFraction res;
+
             if (e.getSource() == addButton) {
                 res = f1.add(f2);
             } else if (e.getSource() == subButton) {
-                res = f1.sub(f2);
+                res = f1.subtract(f2);
             } else if (e.getSource() == mulButton) {
-                res = f1.mul(f2);
+                res = f1.multiply(f2);
             } else if (e.getSource() == divButton) {
-                res = f1.div(f2);
+                res = f1.divide(f2);
             } else {
-                res = new fractionInner(1, 1);
+                res = new MixedFraction(1, 0, 1); // Default value
             }
+
             result.setText(res.toString());
-        } catch (Exception excep) {
-            System.out.println(excep.getMessage());
+        } catch (NumberFormatException | ZeroDenominatorException ex) {
+            result.setText("Invalid input: " + ex.getMessage());
         }
     }
 }

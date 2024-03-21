@@ -124,8 +124,33 @@ public class MixedFraction extends Fraction {
     }
 
     MixedFraction multiply(MixedFraction other) {
-        /** HELP */
-        return other;
+        /**
+         * Method: multiply
+         * Purpose: Multiply the current MixedFraction object by another MixedFraction object.
+         *          The multiplication is performed by converting both mixed fractions to improper fractions,
+         *          then multiplying their numerators and denominators separately.
+         * Parameters:
+         *   - other: The MixedFraction object to multiply the current MixedFraction by.
+         * Preconditions: None
+         * Post-conditions: A new MixedFraction object representing the product of the multiplication is returned.
+         */
+
+        // Multiply the whole parts
+        int newWhole = this.whole * other.whole;
+
+        // Convert both mixed fractions to improper fractions
+        int thisImproperNum = this.whole * this.getDenominator() + this.getNumerator();
+        int otherImproperNum = other.whole * other.getDenominator() + other.getNumerator();
+
+        // Multiply the numerators and denominators separately
+        int newNumerator = thisImproperNum * otherImproperNum;
+        int newDenominator = this.getDenominator() * other.getDenominator();
+
+        // Create a new Fraction object representing the result
+        Fraction resultFraction = new Fraction(newNumerator, newDenominator);
+
+        // Convert the result back to a mixed fraction
+        return new MixedFraction(newWhole, resultFraction);
     }
 
 
