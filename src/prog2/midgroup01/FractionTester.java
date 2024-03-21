@@ -90,7 +90,7 @@ public class FractionTester extends JFrame implements ActionListener {
         // Second prelimgroup.Fraction Inputs
         JPanel rightPanel = new JPanel(new GridLayout(3, 2));
         rightPanel.setPreferredSize(new Dimension(200, 300));
-        rightPanel.setBorder(BorderFactory.createTitledBorder("Second prelimgroup.Fraction"));
+        rightPanel.setBorder(BorderFactory.createTitledBorder("Second Fraction"));
 
         textField4 = new JTextField();
         textField5 = new JTextField();
