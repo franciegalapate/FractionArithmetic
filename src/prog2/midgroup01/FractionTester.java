@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class FractionTester extends JFrame implements ActionListener {
     public static void main(String[] args) {
@@ -34,6 +35,8 @@ public class FractionTester extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
+
+        // Program Icon
 
         // Title Panel
         JPanel titlePanel = new JPanel();
@@ -81,6 +84,14 @@ public class FractionTester extends JFrame implements ActionListener {
         divButton.setFont(myFont);
         improperButton.setFont(myFont);
         mixedButton.setFont(myFont);
+
+        // Removes unnecessary box when button is clicked
+        addButton.setFocusPainted(false);
+        subButton.setFocusPainted(false);
+        mulButton.setFocusPainted(false);
+        divButton.setFocusPainted(false);
+        improperButton.setFocusPainted(false);
+        mixedButton.setFocusPainted(false);
 
         centerPanel.add(addButton);
         centerPanel.add(subButton);
